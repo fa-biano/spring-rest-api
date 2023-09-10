@@ -1,7 +1,4 @@
-package dio.restapi;
-
-// import java.util.Arrays;
-// import java.util.HashSet;
+package dio.restapi.doc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +15,10 @@ import springfox.documentation.builders.PathSelectors;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    // Acessar pelos endpoints: 
+    //     http://localhost:8080/swagger-ui.html
+    //     http://localhost:8080/v2/api-docs
+
     private Contact contact() {
         return new Contact(
             "Nome do desenvolvedor",
@@ -27,15 +28,6 @@ public class SwaggerConfig {
     };
 
     private ApiInfo apiInfoBuilder() {
-        // return new ApiInfoBuilder() 
-        //     .title("Title")
-        //     .description("Description")
-        //     .version("1.0")
-        //     .contact(this.contact())
-        //     .termsOfServiceUrl("TermsOfServiceUrl")
-        //     .license("License")
-        //     .licenseUrl("LicenseUrl");
-
         return new ApiInfoBuilder()
         .title("API REST com Spring")
         .description("Documentação da API REST com Spring")
@@ -48,17 +40,10 @@ public class SwaggerConfig {
 
     @Bean
     public Docket api() {
-        // return new Docket(DocumentationType.SWAGGER_2)
-        //     .select()
-        //     .apis(RequestHandlerSelectors.basePackage("dio.restapi"))
-        //     .paths(PathSelectors.any())
-        //     .build()
-        //     .apiInfo(this.apiInfoBuilder());
-
-        return new Docket(DocumentationType.SWAGGER_2)  
-            .select()                                  
-            .apis(RequestHandlerSelectors.any())              
-            .paths(PathSelectors.any())                          
+        return new Docket(DocumentationType.SWAGGER_2)
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("dio.restapi"))
+            .paths(PathSelectors.any())
             .build()
             .apiInfo(this.apiInfoBuilder());
     }
